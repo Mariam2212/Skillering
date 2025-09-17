@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="feedback-wrapper">
+    <div class="feedback-card">
+      <h2>💬 Send Us Your Feedback</h2>
+      <p class="desc">Help us improve by sharing your opinion or suggestion</p>
+      
+      <form id="feedbackForm" enctype="multipart/form-data">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+
+        <!-- Feedback type -->
+        <div class="form-group">
+          <label for="type">Feedback Type</label>
+          <select id="type" name="type" required>
+            <option value="">Select type</option>
+            <option value="Suggestion">Suggestion</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Inquiry">Inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <!-- Upload screenshot -->
+        <div class="form-group">
+          <label for="screenshot">Attach a screenshot (optional)</label>
+          <input type="file" id="screenshot" name="screenshot" accept="image/*">
+          <div id="preview"></div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"> Submit Feedback📩 </button>
+        <p id="successMsg" class="hidden"> Feedback sent successfully!✅ </p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("feedbackForm");
+    const successMsg = document.getElementById("successMsg");
+    const fileInput = document.getElementById("screenshot");
+    const preview = document.getElementById("preview");
+
+    // Preview image
+    fileInput.addEventListener("change", () => {
+      preview.innerHTML = "";
+      const file = fileInput.files[0];
+      if (file) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = "100%";
+        img.style.marginTop = "10px";
+        img.style.borderRadius = "8px";
+        preview.appendChild(img);
+      }
+    });
+
+    // Handle form submit
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      successMsg.classList.remove("hidden");
+      form.reset();
+      preview.innerHTML = "";
+    });
+  </script>
+</body>
+</html>

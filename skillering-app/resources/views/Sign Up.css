@@ -1,0 +1,75 @@
+:root{
+  --bg:#ffffff;
+  --card-border:#bfbfbf;
+  --muted:#6b6b6b;
+  --blue:#2ea3ff;
+  --accent:#3b82f6;
+  --serif:"Playfair Display", serif;
+  --sans: "Inter", system-ui, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+body{font-family:var(--sans);margin:0;background:var(--bg);color:#111;}
+
+/* top-left logo */
+.topbar{position:fixed;left:18px;top:18px}
+.logo-box{width:110px;height:110px;background:#e6e6e6;border-radius:2px;display:flex;align-items:center;justify-content:center}
+.logo-img{max-width:90%;max-height:90%;object-fit:contain}
+
+/* center wrapper */
+.center-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 20px}
+
+/* card */
+.card{width:460px;border-radius:10px;padding:24px;border:1px solid var(--card-border);box-shadow:none;background:#fff}
+.card-inner{max-width:420px;margin:0 auto}
+
+/* identity sentence centered above */
+.identity-sentence{font-family:var(--serif);text-align:center;margin:0 0 18px;color:#222;font-size:18px}
+
+/* labels and fields */
+.field-label{display:block;margin-top:8px;margin-bottom:8px;font-family:var(--serif);font-size:15px;color:#111}
+.field{border:1px solid #bfbfbf;padding:12px;border-radius:4px;background:#fff;margin-bottom:12px}
+.field input{border:0;outline:none;font-size:15px;width:100%;font-family:var(--sans)}
+.password-field{position:relative;display:flex;align-items:center}
+.eye-btn{position:absolute;right:14px;background:transparent;border:0;padding:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* checkbox row */
+.checkbox-row{display:flex;align-items:center;gap:12px;margin:14px 0}
+.round-checkbox{width:36px;height:36px;border-radius:50%;border:2px solid #1ea1ff;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.round-checkbox:focus{outline:3px solid rgba(46,163,255,0.18)}
+.checkbox-text{font-family:var(--serif);font-weight:600;color:#111}
+
+/* legal text */
+.legal{font-size:13px;color:#222;line-height:1.35;margin:8px 0}
+.link{color:var(--blue);text-decoration:none;margin-left:4px}
+
+/* CTA */
+.cta{display:block;padding:16px 28px;border-radius:40px;border:0;font-family:var(--serif);font-size:20px;cursor:pointer;margin-top:12px}
+.cta.primary{background:linear-gradient(90deg,var(--blue),var(--accent));color:#fff;box-shadow:0 8px 0 rgba(0,0,0,0.02)}
+.or-sep{display:flex;align-items:center;gap:12px;margin:18px 0;justify-content:center}
+.or-sep::before,.or-sep::after{content:"";flex:1;height:1px;background:#d6d6d6}
+.or-sep span{padding:0 10px;font-family:var(--serif);color:#222}
+
+/* social buttons */
+.social{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:28px;border:1px solid #d9d9d9;background:#fff;margin-bottom:12px;font-family:var(--serif);font-size:18px;cursor:pointer}
+.social .social-icon{display:flex;align-items:center;justify-content:center}
+.social .social-text{flex:1;text-align:center}
+.google-icon svg{height:26px}
+.microsoft-icon svg{height:26px}
+
+/* bottom "already" */
+.already{font-family:var(--serif);text-align:center;margin-top:10px;font-size:18px}
+.signin-link{color:var(--blue);text-decoration:none;margin-left:6px}
+
+/* footer */
+.page-footer{position:fixed;left:18px;right:18px;bottom:18px;display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#111}
+.footer-left{background:#e6e6e6;padding:12px 18px;border-radius:4px}
+.footer-links{display:flex;gap:20px;align-items:center}
+.footer-links a{color:#111;text-decoration:none;font-family:var(--serif)}
+
+/* responsive */
+@media (max-width:640px){
+  .card{width:92%;padding:18px}
+  .logo-box{width:82px;height:82px}
+  .cta{font-size:18px}
+}
