@@ -1,0 +1,160 @@
+/* ========== Reset & Base ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ========== Header ========== */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+}
+
+/* ========== Main Content ========== */
+.container {
+  flex: 1;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* ========== Bubbles ========== */
+.bubbles {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.bubble {
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #eaeaea;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bubble:hover {
+  background: #d3d3d3;
+}
+
+/* ========== Chat Input ========== */
+.chat-box {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.chat-box input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  flex: 1;
+  max-width: 300px;
+}
+
+.chat-box button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-box button:hover {
+  background: #0056b3;
+}
+
+/* ========== Actions ========== */
+.actions {
+  margin-bottom: 40px;
+}
+
+.actions .regenerate {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: #fff;
+  cursor: pointer;
+}
+
+.actions .regenerate:hover {
+  background: #1e7e34;
+}
+
+/* ========== Footer ========== */
+.page-footer {
+  background: #fff;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #555;
+}
+
+.footer-left {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.lang {
+  cursor: pointer;
+  margin-top: 10px;
+}
