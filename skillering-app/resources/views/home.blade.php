@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skillering - الصفحة الرئيسية</title>
     <link rel="stylesheet" href="welcomepage.css">
-</head>
+</head> 
 <body>
     <header>
         <div class="logo">LOGO</div>
