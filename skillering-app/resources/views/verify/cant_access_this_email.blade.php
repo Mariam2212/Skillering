@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Skillering - Can't Access Email</title>
-  <link rel="stylesheet" href="Can't access this email.css">
+  <link rel="stylesheet" href="{{ asset('css/verify/cant_access_this_email.css') }}">
 </head>
 <body>
   <img src="logo.png" alt="Skillering Logo" class="logo">
@@ -27,11 +27,11 @@
      <footer>
        <img src="logo-small.png" alt="Small Logo" class="logo-small">
         <a href="#">@2025</a>&nbsp;&nbsp;
-        <a href="../Sign Up/User Agreement.html">User Agreement</a>&nbsp;&nbsp;
-        <a href="../Sign Up/privacy Policy.html">Privacy Policy</a>&nbsp;&nbsp;
-        <a href="../Sign Up/Cookie policy.html">Cookie Policy</a>&nbsp;&nbsp;
-        <a href="../Sign Up/Send FeedBack.html">Send Feedback</a>&nbsp;&nbsp;
-        <a href="../Sign Up/Terms of conditions.html">Terms & Conditions</a>&nbsp;&nbsp;
+        <a href="{{ route('user_agreement') }}">User Agreement</a>&nbsp;&nbsp;
+        <a href="{{ route('privacy_policy') }}">Privacy Policy</a>&nbsp;&nbsp;
+        <a href="{{ route('cookie_policy') }}">Cookie Policy</a>&nbsp;&nbsp;
+        <a href="{{ route('send_feedback') }}">Send Feedback</a>&nbsp;&nbsp;
+        <a href="{{ route('terms_conditions') }}">Terms & Conditions</a>&nbsp;&nbsp;
       </nav>
       <div class="lang">Language ▼</div>
     </footer>

@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skillering - الصفحة الرئيسية</title>
-    <link rel="stylesheet" href="welcomepage.css">
-</head> 
+    <link rel="stylesheet" href="/css/welcomepage/welcomepage.css">
+</head>
 <body>
     <header>
         <div class="logo">LOGO</div>
         <nav>
-          <a href="../Sign In/Sign In.html">
-            <button>Sign In</button>
+            <a href="{{ route('signin') }}">
+                <button>Sign In</button>
             </a>
-            <a href="../Sign Up/Sign Up.html">
+            <a href="{{ route('signup') }}">
             <button>Sign Up</button>
             </a>
             <div class="menu" onclick="toggleMenu()">☰</div>
@@ -27,7 +27,7 @@
             <li><a href="#">المجتمع</a></li>
             <li><a href="#">الأحداث</a></li>
             <li><a href="#">السوق</a></li>
-            <li><a href="../Welcomepage/Dashbord.html">لوحة التحكم</a></li>
+            <li><a href="{{ route('dashboard') }}">لوحة التحكم</a></li>
         </ul>
     </div>
 

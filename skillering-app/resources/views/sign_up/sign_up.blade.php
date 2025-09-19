@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Skillering — Agree & Signup</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Sign Up.css">
+  <link rel="stylesheet" href="{{ asset('css/sign_up/sign_up.css') }}">
 </head>
 <body>
   <!-- top-left logo block -->
@@ -56,7 +56,7 @@
               <a href="Cookie policy.html" class="link">Cookie Policy</a>.
             </p>
 
-           <center><button class="cta primary" id="agree-btn">Agree &amp; Signup</button></center> 
+           <center><button class="cta primary" id="agree-btn">Agree &amp; Signup</button></center>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -146,16 +146,16 @@
       <nav class="footer-links">
         <a href="#">@2025</a>
             <br>
-    <a href="User Agreement.html">User Agreement</a>
+    <a href="{{ route('user_agreement') }}">User Agreement</a>
 
             <br>
-    <a href="privacy Policy.html">Privacy policy</a>
+    <a href="{{ route('privacy_policy') }}">Privacy policy</a>
         <br>
-     <a href="Cookie policy.html">Cookie Policy</a>
+     <a href="{{ route('cookie_policy') }}">Cookie Policy</a>
         <br>
-     <a href="Send FeedBack.html">Send Feedback</a>
+     <a href="{{ route('send_feedback') }}">Send Feedback</a>
         <br>
-         <a href="Terms of conditions.html">Terms & Conditions</a>
+         <a href="{{ route('terms_conditions') }}">Terms & Conditions</a>
       </nav>
       <div class="lang">Language ▾</div>
     </footer>

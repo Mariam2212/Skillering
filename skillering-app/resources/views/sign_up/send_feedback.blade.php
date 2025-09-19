@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Feedback Form</title>
-  <link rel="stylesheet" href="feedback.css">
+  <link rel="stylesheet" href="{{ asset('css/sign_up/feedback.css') }}">
 </head>
 <body>
   <div class="feedback-wrapper">
     <div class="feedback-card">
       <h2>💬 Send Us Your Feedback</h2>
       <p class="desc">Help us improve by sharing your opinion or suggestion</p>
-      
+
       <form id="feedbackForm" enctype="multipart/form-data">
         <!-- Name -->
         <div class="form-group">

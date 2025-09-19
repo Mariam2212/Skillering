@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skillering — Sign In</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="{{ asset('css/sign_in/sign_in.css') }}">
   <style>
     /* Body & fonts */
     body {
@@ -232,7 +233,7 @@
         <div class="card-inner">
           <h3 class="identity-sentence">Welcome Back!</h3>
           <form id="auth" class="auth-form" autocomplete="off" novalidate>
-            
+
             <!-- Auth buttons -->
             <button type="button" class="auth-btn" id="googleBtn">
               <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google">
@@ -264,12 +265,12 @@
               <label for="keep-logged">Keep Me Logged In</label>
             </div>
 
-            <a href="../forgetpassword/Forgetpassword.html" class="forgot-password">Forget Password?</a>
+            <a href="{{ route('forgetpassword') }}" class="forgot-password">Forget Password?</a>
 
             <!-- Sign In Button -->
             <button type="submit" class="sign-in-btn">Sign In</button>
 
-            <p class="already">New to Skillering? <a href="../Sign Up/Sign Up.html">Join now</a></p>
+            <p class="already">New to Skillering? <a href="{{ route('signup') }}">Join now</a></p>
 
           </form>
         </div>
@@ -281,11 +282,11 @@
       <div class="footer-left">Logo small</div>
       <nav class="footer-links">
         <a href="#">@2025</a>
-        <a href="../Sign Up/User Agreement.html">User Agreement</a>
-        <a href="../Sign Up/privacy Policy.html">Privacy Policy</a>
-        <a href="../Sign Up/Cookie policy.html">Cookie Policy</a>
-        <a href="../Sign Up/Send FeedBack.html">Send Feedback</a>
-        <a href="../Sign Up/Terms of conditions.html">Terms & Conditions</a>
+        <a href="{{ route('user_agreement') }}">User Agreement</a>
+        <a href="{{ route('privacy_policy') }}">Privacy policy</a>
+        <a href="{{ route('cookie_policy') }}">Cookie Policy</a>
+        <a href="{{ route('send_feedback') }}">Send Feedback</a>
+        <a href="{{ route('terms_conditions') }}">Terms & Conditions</a>
       </nav>
       <div class="lang">Language ▼</div>
     </footer>

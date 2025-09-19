@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Skills Selection</title>
-  <link rel="stylesheet" href="Suggest.css">
+  <link rel="stylesheet" href="{{ asset('css/suggest_page/suggest.css') }}">
 </head>
 <body>
   <div class="page">
@@ -35,11 +35,11 @@
   <div class="footer-left">Logo small</div>
   <nav class="footer-links">
     <a href="#">@2025</a><br>
-    <a href="../Sign Up/User Agreement.html">User Agreement</a><br>
-    <a href="../Sign Up/privacy Policy.html">Privacy policy</a><br>
-    <a href="../Sign Up/Cookie policy.html">Cookie Policy</a><br>
-    <a href="../Sign Up/Send FeedBack.html">Send Feedback</a><br>
-    <a href="../Sign Up/Terms of conditions.html">Terms & Conditions</a>
+    <a href="{{ route('user_agreement') }}">User Agreement</a><br>
+    <a href="{{ route('privacy_policy') }}">Privacy policy</a><br>
+    <a href="{{ route('cookie_policy') }}">Cookie Policy</a><br>
+    <a href="{{ route('send_feedback') }}">Send Feedback</a><br>
+    <a href="{{ route('terms_conditions') }}">Terms & Conditions</a>
   </nav>
   <div class="lang">Language ▾</div>
 </footer>
