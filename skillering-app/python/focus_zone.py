@@ -1,11 +1,11 @@
 import json
-import time
 import os
+import re
 from datetime import datetime, timedelta
 import google.generativeai as genai
-import re
 
 PROGRESS_FILE = "progress.json"
+
 
 def generate_focus_plan(skill, level):
     prompt = f"""
@@ -38,7 +38,6 @@ def generate_focus_plan(skill, level):
 
 
 def load_progress():
-    """Load progress from file"""
     if os.path.exists(PROGRESS_FILE):
         with open(PROGRESS_FILE, "r") as f:
             return json.load(f)
@@ -46,22 +45,22 @@ def load_progress():
 
 
 def save_progress(progress):
-    """Save progress to file"""
     with open(PROGRESS_FILE, "w") as f:
         json.dump(progress, f, indent=2)
 
 
 def run_focus_session(plan, avg_hours=2):
-    """Run the focus zone session with timer + 3-question limit"""
+    """
+    Run focus session (API-friendly version).
+    Instead of sleeping/printing, return JSON for frontend.
+    """
     progress = load_progress()
     day = progress["current_day"]
 
-
     # find today's task
-    todays_task = next((t for t in plan["weekly_plan"] if t["day"] == day), None)
+    todays_task = next((t for t in plan.get("weekly_plan", []) if t["day"] == day), None)
     if not todays_task:
-        print("✅ All tasks completed! You finished the weekly plan.")
-        return
+        return {"status": "done", "message": "All tasks completed! 🎉"}
 
     # check if task is locked
     if progress["last_completed"]:
@@ -69,45 +68,33 @@ def run_focus_session(plan, avg_hours=2):
         unlock_time = last_done + timedelta(hours=todays_task["unlock_after"])
         if datetime.now() < unlock_time:
             wait = (unlock_time - datetime.now()).seconds // 3600
-            print(f"⏳ Next task unlocks in {wait} hrs. Please come back later.")
-            return
+            return {
+                "status": "locked",
+                "message": f"Next task unlocks in {wait} hrs ⏳"
+            }
 
-    # show task info
-    print(f"\n📌 Focus Task - Day {todays_task['day']}")
-    print(f"Task: {todays_task['task']}")
-    print(f"Requirements: {', '.join(todays_task['requirements'])}")
-    print(f"Tools: {', '.join(todays_task['tools'])}")
-    print(f"⏱ You have {avg_hours:.1f} hours to complete this task.")
+    # return session data (let frontend handle timer)
+    return {
+        "status": "active",
+        "day": todays_task["day"],
+        "task": todays_task["task"],
+        "requirements": todays_task["requirements"],
+        "tools": todays_task["tools"],
+        "time_allocated": avg_hours,
+    }
 
-    # start timer (just simulates countdown in console)
-    seconds = int(avg_hours * 3600)
-    for remaining in range(seconds, 0, -1800):  # updates every 30 mins
-        print(f"Time left: {remaining//3600}h {(remaining%3600)//60}m")
-        time.sleep(1)  # ⬅️ change to 1800 for real 30-min updates
 
-    print("\n⏰ Time is up! Great work on your task.")
-
-    # AI help (limit 3 questions)
-    help_count = 0
-    while help_count < 3:
-        q = input("Need AI help? (ask a question or type 'no'): ")
-        if q.lower() == "no":
-            break
-        # here you'd call Gemini/OpenAI to answer, placeholder:
-        print(f"🤖 AI: Here's a helpful tip for '{q}' ...")
-        help_count += 1
-    if help_count >= 3:
-        print("⚠️ You reached the daily AI help limit.")
-
-    # mark task complete
+def complete_task():
+    """Mark current task complete"""
+    progress = load_progress()
     progress["last_completed"] = datetime.now().isoformat()
     progress["current_day"] += 1
     save_progress(progress)
-    print("✅ Task marked complete. Come back tomorrow for the next one!")
+    return {"status": "success", "message": "Task marked complete ✅"}
+
 
 def safe_json_parse(text):
     """Strip markdown fences and parse JSON safely"""
-    # Remove markdown ```json ... ``` wrappers if present
     cleaned = re.sub(r"```[a-zA-Z]*\n?", "", text).strip("` \n")
     try:
         return json.loads(cleaned)
