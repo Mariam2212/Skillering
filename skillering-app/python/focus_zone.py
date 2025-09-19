@@ -1,3 +1,22 @@
+"""
+focus_zone.py
+--------------
+Handles Focus Zone learning plan generation and focus session logic.
+
+This file:
+- Generates a 7-day learning plan for a skill using Gemini API (`generate_focus_plan`)
+- Tracks user progress with JSON file storage (`load_progress`, `save_progress`)
+- Runs daily focus sessions (`run_focus_session`)
+    * Checks if tasks are unlocked
+    * Returns structured task data for frontend timers
+- Marks tasks complete (`complete_task`)
+- Provides safe parsing of AI JSON responses (`safe_json_parse`)
+
+Note:
+- Functions are designed to return JSON/dictionaries (API-friendly).
+- Frontend handles countdown timers & task display, not Python sleep/input.
+"""
+
 import json
 import os
 import re

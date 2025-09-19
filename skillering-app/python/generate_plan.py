@@ -1,63 +1,66 @@
-# generate_plan.py
-import sys
-import json
 
-def generate_weekly_plan(skill, level):
-    plan = {
-        "Basic Cooking": [
-            ("Monday", "Knife Skills: Safe Handling and Basic Cuts (dice, chop, mince)",
-             ["Sharp knife", "cutting board", "onion", "potato", "carrot"],
-             ["Knife", "cutting board", "bowl"]),
-            ("Tuesday", "Understanding Cooking Temperatures: Boiling and Simmering",
-             ["Pot", "water", "pasta (any kind)"],
-             ["Pot", "stove", "timer", "measuring spoons"]),
-            ("Wednesday", "Simple Egg Cooking: Scrambled, Fried, and Boiled",
-             ["Eggs", "butter or oil", "salt", "pepper"],
-             ["Frying pan", "saucepan", "whisk"]),
-            ("Thursday", "Basic Salad Preparation: Washing, Chopping, and Dressing",
-             ["Lettuce", "tomato", "cucumber", "vinaigrette dressing"],
-             ["Cutting board", "knife", "bowl"]),
-            ("Friday", "Cooking Rice: Perfect fluffy rice",
-             ["Rice", "water", "pot with lid"],
-             ["Pot with lid", "measuring cup"]),
-            ("Saturday", "Simple One-Pan Meal: Roasted Vegetables",
-             ["Broccoli", "carrots", "potatoes", "olive oil", "salt", "pepper"],
-             ["Baking sheet", "oven"]),
-            ("Sunday", "Review and Practice: Choose one task from this week and repeat it.",
-             ["Ingredients from previous tasks"],
-             ["Tools used in the chosen task"])
-        ]
-    }
 
-    if skill not in plan:
-        return {"error": "Skill not supported yet."}
+from fastapi import FastAPI
+from utils import setup_api
+from screentime import load_screentime, calculate_average_hours
+from skills import suggest_skills
+from focus_zone import generate_focus_plan, run_focus_session
+from generate_plan import generate_weekly_plan  # ⬅ import the module
 
-    tasks = []
-    unlock_time = 0  # Start immediately for the first task
+# ✅ Create FastAPI app
+app = FastAPI(
+    title="Focus Zone AI Backend",
+    description="Provides endpoints for Focus Zone project",
+    version="1.1.0"
+)
 
-    for day, task, requirements, tools in plan[skill]:
-        tasks.append({
-            "day": day,
-            "task": task,
-            "requirements": requirements,
-            "tools": tools,
-            "unlock_after": unlock_time
-        })
-        unlock_time = 24  # After the first one, always 24h delay
+# ✅ Setup external API (Gemini or other integrations)
+setup_api()
 
-    return {
-        "skill": skill,
-        "level": level,
-        "weekly_plan": tasks,
-        "outcome": "Ability to perform basic cooking tasks and build confidence in the kitchen.",
-        "next_step": "Learn more advanced cooking techniques like sautéing, stir-frying, and baking."
-    }
 
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python generate_plan.py <skill> <level>")
-    else:
-        skill = sys.argv[1]
-        level = sys.argv[2]
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "Focus Zone AI backend is running 🚀"}
+
+
+@app.get("/analysis")
+def analyze():
+    try:
+        df = load_screentime()
+        avg_hours = calculate_average_hours(df)
+        skills = suggest_skills(avg_hours)
+        return {"status": "success", "average_hours": avg_hours, "suggested_skills": skills}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}
+
+
+@app.get("/focus-plan/{skill}/{level}")
+def focus_plan(skill: str, level: str = "beginner"):
+    try:
+        plan = generate_focus_plan(skill, level)
+        return {"status": "success", "skill": skill, "level": level, "plan": plan}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}
+
+
+@app.get("/focus-session/{minutes}")
+def focus_session(minutes: int):
+    try:
+        session = run_focus_session(minutes)
+        return {"status": "success", "minutes": minutes, "session": session}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}
+
+
+# ✅ NEW endpoint to generate weekly plan from generate_plan.py
+@app.get("/generate-plan/{skill}/{level}")
+def generate_plan(skill: str, level: str = "beginner"):
+    """
+    Generate a structured weekly plan using generate_plan.py.
+    Frontend/backend can call this to get tasks for a specific skill.
+    """
+    try:
         plan = generate_weekly_plan(skill, level)
-        print(json.dumps(plan, indent=2, ensure_ascii=False))
+        return {"status": "success", "plan": plan}
+    except Exception as e:
+        return {"status": "error", "details": str(e)}

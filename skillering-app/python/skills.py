@@ -1,3 +1,27 @@
+"""
+skills.py
+----------
+Provides functionality to suggest offline and practical skills for users based on
+their screen time and app usage patterns.
+
+This file:
+- Uses AI (Gemini) to generate skill recommendations.
+- Determines user skill level based on average daily screen time:
+    - <=2 hours → Beginner
+    - 2–5 hours → Intermediate
+    - >5 hours → Advanced
+- Suggests exactly 3 skills:
+    1. Practical life skill
+    2. Non-digital offline hobby
+    3. Money-making skill
+- Each suggested skill includes:
+    - "skill": name of the skill
+    - "level": recommended skill level
+    - "why": reason it’s suggested
+    - "category": type of skill (practical, non-digital, money-making)
+- Uses `safe_json_parse` to safely parse AI JSON output.
+"""
+
 import json
 import google.generativeai as genai
 import re

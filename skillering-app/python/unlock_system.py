@@ -1,3 +1,20 @@
+"""
+unlock_system.py
+----------------
+Manages the unlocking and completion of daily tasks in the Focus Zone project.
+
+This file:
+- Checks if the current day's task is unlocked based on time and user progress.
+- Marks tasks as completed, updating:
+    - Current day
+    - List of completed tasks
+    - Next unlock timestamp (24 hours after completion)
+- Relies on `progress_manager` to load and save user progress.
+- Provides two main functions:
+    1. `is_task_unlocked()` → Returns a tuple (bool, message) indicating if the task is available.
+    2. `complete_task()` → Marks the current task as complete and schedules the next unlock.
+"""
+
 from datetime import datetime, timedelta
 from progress_manager import load_progress, save_progress
 

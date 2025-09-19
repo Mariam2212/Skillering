@@ -4,3 +4,7 @@ pydantic==2.11.9
 python-dotenv
 pandas
 google-generativeai
+google-auth-httplib2
+google-api-core
+google-api-python-client
+
